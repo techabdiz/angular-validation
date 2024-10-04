@@ -1,0 +1,57 @@
+<div>
+    <div>
+        <a [routerLink]="['']"><u>go home</u></a>
+    </div>
+
+    <div style="margin-top: 20px;">
+        <table border="1px">
+            <tr>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Action <button (click)="addNew()">+ New</button></th>
+            </tr>
+            <tr *ngFor="let user of data; index as i" [formGroup]="formGroups[i]">
+
+                <td>
+                    <div>
+                        {{user.id}}
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="!user.editing">
+                        {{user.firstName}}
+                    </div>
+                    <div *ngIf="user.editing">
+                        <input type="text" formControlName="firstName"/>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="!user.editing">
+                        {{user.lastName}}
+                    </div>
+                    <div *ngIf="user.editing">
+                        <input type="text" formControlName="lastName"/>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="!user.editing">
+                        {{user.email}}
+                    </div>
+                    <div *ngIf="user.editing" >
+                        <input type="text" formControlName="email"/>
+                    </div>
+                </td>
+                <td>
+                    <button *ngIf="user.editing" (click)="editValues(i)">Save</button>
+                    <button (click)="user.editing=!user.editing" *ngIf="!user.editing">Edit</button>
+                    <button (click)="user.editing=!user.editing"  *ngIf="user.editing" >Done</button>
+                    <button  *ngIf="!user.editing" (click)="deleteUser(i)">Delete</button>
+                    <button [routerLink]="['/edit', user.id]">Form Edit</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+</div>

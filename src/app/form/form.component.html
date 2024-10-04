@@ -1,0 +1,44 @@
+<div>
+
+    <div>
+        <a [routerLink]="['']"><u>go home</u></a>
+    </div>
+    <div>
+        <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+            <div>
+                <h2>Enter user details.</h2>
+            </div>
+            <div>
+                <input placeholder="first name" formControlName="firstName"/>
+                <div class="valid_error" *ngIf="userForm.get('firstName')?.touched && userForm.get('firstName')?.invalid ">please enter valid first name.</div>
+            </div>
+            <div>
+                <input placeholder="last name" formControlName="lastName"/>
+                <div class="valid_error" *ngIf="userForm.get('lastName')?.touched && userForm.get('lastName')?.invalid " >please enter valid last name.</div>
+            </div>
+            <div>
+                <input placeholder="email" formControlName="email"/>
+                <div  class="valid_error" *ngIf="userForm.get('email')?.touched && userForm.get('email')?.invalid ">please enter valid email.</div>
+            </div>
+            <br>
+            <div>
+                <button style="margin-right: 3px;" type="submit" [disabled]="userForm.invalid">submit</button>
+                <button (click)="userForm.reset()" type="button">reset</button>
+            </div>
+            <br>
+            <div>
+                {{message}}
+            </div>
+        </form>
+    </div>
+
+
+    <div>
+        <p>Template example</p>
+        <button (click)="templateToggle=!templateToggle">Toggle</button><br>
+        <div *ngIf="templateToggle; else togg">This is a div</div>
+        <ng-template #togg>
+            This is ng template
+        </ng-template>
+    </div>
+</div>
